@@ -3,7 +3,7 @@ def call(boolean abortPipeline = false, boolean sonarExecution = true) {
     
     def shouldAbort = abortPipeline || (branch == 'master') || (branch.startsWith('hotfix'))
 
-    withSonarQubeEnv('SonarQube') {
+    withSonarQubeEnv('Sonar Local') {
         timeout(time: 5, unit: 'MINUTES') {
             if (sonarExecution) {
                 sh 'echo "Ejecución de las pruebas de calidad de código"'
