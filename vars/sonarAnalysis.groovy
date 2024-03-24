@@ -1,7 +1,7 @@
-def call(boolean abortPipeline, boolean sonarExecution) {
+def call(boolean abortPipeline = false, boolean sonarExecution = true, String branchName = '') {
     def abort = abortPipeline ?: false
     def sonar = sonarExecution ?: false
-    def branch = env.BRANCH_NAME
+    def branch = branchName?: env.BRANCH_NAME
     
     def shouldAbort = abort || (branch == 'master') || (branch.startsWith('hotfix'))
 
