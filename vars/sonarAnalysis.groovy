@@ -1,4 +1,7 @@
-def call(boolean abortPipeline = false, boolean sonarExecution = true) {
+def call(boolean abortPipeline = false, boolean sonarExecution = true, String branchName = '') {
+    def branch = branchName ?: env.BRANCH_NAME
+    def shouldAbort = abortPipeline || (branch == 'master') || (branch.startsWith('hotfix'))
+
     withSonarQubeEnv('SonarQube') {
         timeout(time: 5, unit: 'MINUTES') {
             if (sonarExecution) {
@@ -15,3 +18,4 @@ def call(boolean abortPipeline = false, boolean sonarExecution = true) {
         }
     }
 }
+
